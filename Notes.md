@@ -57,5 +57,24 @@ $ pnpm run dev
   - create a file `middleware.ts` - in here we add configuration - The `clerkMiddleware` helper enables authentication and is where you'll configure your protected routes.
   - Add `ClerkProvider` to your app: The `ClerkProvidercomponent` provides Clerk's authentication context to your app. It's recommended to wrap your entire app at the entry point with ClerkProvider to make authentication globally accessible.Copy and paste the following file into your `layout.tsx` file. This creates a header with Clerk's prebuilt components to allow users to sign in and out. `app/layout.jsx`
   - Then we can start our project -> Create your first user -> `pnpm dev`
+  - Now we can see middleware is also being compiled.
 
+```bash
+abhis@Tinku MINGW64 ~/Desktop/NextJs Projects/gocart (main)
+$ pnpm dev
 
+> gocart@0.1.0 dev C:\Users\abhis\Desktop\NextJs Projects\gocart
+> next dev --turbopack
+
+   ▲ Next.js 15.3.5 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.29.186:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ○ Compiling middleware ...
+ ✓ Compiled middleware in 3.7s
+ ✓ Ready in 7.5s
+```
+
+- Now we will add the click functionality in Navigation Bar - `NavBar.jsx`
