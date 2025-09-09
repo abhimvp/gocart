@@ -78,3 +78,44 @@ $ pnpm dev
 ```
 
 - Now we will add the click functionality in Navigation Bar - `NavBar.jsx`
+- Let's connect our project to a database - to store our data - we use [NEON](https://neon.com/) - fully managed serverless postgres DB built for modern application. - [ORM](https://neon.com/docs/guides/prisma)
+- create an account in neon - create a new project - create a new database - get the connection string and add it to `.env` file as `DATABASE_URL`
+- Since we've already created schemas in `schema.prisma`
+- Generate Prisma client: `npx prisma generate`
+
+```bash
+$ npx prisma generate
+Need to install the following packages:
+prisma@6.15.0
+Ok to proceed? (y) y
+
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+
+✔ Installed the @prisma/client and prisma packages in your project
+
+✔ Generated Prisma Client (v6.15.0) to .\node_modules\.pnpm\@prisma+client@6.15.0_prisma@6.15.0\node_modules\@prisma\client in 246ms
+
+Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+
+Tip: Need your database queries to be 1000x faster? Accelerate offers you that and more: https://pris.ly/tip-2-accelerate
+```
+
+- Install the Prisma adapter for Neon, the Neon serverless driver, and ws packages:
+
+  - `pnpm add ws @prisma/adapter-neon @neondatabase/serverless`
+  - `pnpm add -D @types/ws`
+
+- Create a configuration file - where we import PrismaClient, PrismaNeon, neonConfig - `lib/prisma.js`.
+- next we have to execute a command that pushes our schema as tables to our database. `npx prisma db push`
+
+```bash
+$ npx prisma db push
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+Datasource "db": PostgreSQL database "neondb", schema "public" at "**********.us-east-1.aws.neon.tech"
+
+Your database is now in sync with your Prisma schema. Done in 18.42s
+
+✔ Generated Prisma Client (v6.15.0) to .\node_modules\.pnpm\@prisma+client@6.15.0_prisma@6.15.0\node_modules\@prisma\client in 301ms
+```
